@@ -44,7 +44,7 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
@@ -65,15 +65,15 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
             throw new InvalidAlgorithmParameterException("Index \"Begin\" should be less then index \"End\"");
         }
 
-        for(int i = 0; i < arr.length; i++) {
-            for(int j = 0; j < arr.length - 1; j++) {
+        for(int i = begin; i < end; i++) {
+            for(int j = begin; j < end - 1; j++) {
                 if(arr[j].compareTo(arr[j + 1])  > 0) {
                     T t = arr[j];
                     arr[j] = arr[j + 1];
@@ -124,16 +124,16 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
             throw new InvalidAlgorithmParameterException("Index \"Begin\" should be less then index \"End\"");
         }
 
-        for(int i = 1; i < arr.length; i++) {
+        for(int i = begin + 1; i < end; i++) {
             int j = i;
-            while(arr[j] < arr[Math.max(0, j - 1)] && j > 0) {
+            while(arr[j] < arr[Math.max(begin, j - 1)] && j > 0) {
                 int t = arr[j];
                 arr[j] = arr[j - 1];
                 arr[j - 1] = t;
@@ -146,16 +146,16 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
             throw new InvalidAlgorithmParameterException("Index \"Begin\" should be less then index \"End\"");
         }
 
-        for(int i = 1; i < arr.length; i++) {
+        for(int i = begin + 1; i < end; i++) {
             int j = i;
-            while(arr[j].compareTo(arr[Math.max(0, j - 1)]) < 0 && j > 0) {
+            while(arr[j].compareTo(arr[Math.max(begin, j - 1)]) < 0 && j > 0) {
                 T t = arr[j];
                 arr[j] = arr[j - 1];
                 arr[j - 1] = t;
@@ -215,7 +215,7 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
@@ -241,7 +241,7 @@ public class SimpleSort {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
-        if(end < 0 || begin > arr.length) {
+        if(end < 0 || end > arr.length) {
             throw new IndexOutOfBoundsException();
         }
         if(begin > end) {
