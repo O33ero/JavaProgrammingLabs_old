@@ -41,26 +41,22 @@ public class EffectiveSort {
 
     public static void QuickSort(int[] arr, int begin, int end) {
 
-        int c = (end + begin) / 2; // Индекс опорного элемента
-        int p = arr[c]; // Опорный элемент
-        int i = begin; // Левая граница (отвечает за меньшее)
-        int j = end; // Правая граница (отвечает за большее)
+        if(begin >= end) return;
+
+        int p = arr[end]; // Опорный элемент
+        int i = begin - 1; // Левая граница (отвечает за меньшее)
         
-
-        while(i <= j) {
-            while(arr[i] < p) i++;
-            while(arr[j] > p) j--;
-
-            if(i <= j) {
-                swap(arr, i, j);
+        for(int j = begin; j < end; j++) {
+            if(arr[j] <= p) {
                 i++;
-                j--;
+                swap(arr, i, j);
             }
         }
-        if(j > begin) 
-            QuickSort(arr, begin, c);
-        if(i < end)
-            QuickSort(arr, c, end);
+
+        swap(arr, i + 1, end);
+
+        QuickSort(arr, begin, i);
+        QuickSort(arr, i + 2, end);
     }
 
 
@@ -70,26 +66,22 @@ public class EffectiveSort {
 
     public static <T extends Comparable<T>> void QuickSort(T[] arr, int begin, int end) {
 
-        int c = (end + begin) / 2; // Индекс опорного элемента
-        T p = arr[c]; // Опорный элемент
-        int i = begin; // Левая граница (отвечает за меньшее)
-        int j = end; // Правая граница (отвечает за большее)
+        if(begin >= end) return;
+
+        T p = arr[end]; // Опорный элемент
+        int i = begin - 1; // Левая граница (отвечает за меньшее)
         
-
-        while(i <= j) {
-            while(arr[i].compareTo(p) < 0) i++;
-            while(arr[j].compareTo(p) > 0) j--;
-
-            if(i <= j) {
-                swap(arr, i, j);
+        for(int j = begin; j < end; j++) {
+            if(arr[j].compareTo(p) <= 0) {
                 i++;
-                j--;
+                swap(arr, i, j);
             }
         }
-        if(j > begin) 
-            QuickSort(arr, begin, c);
-        if(i < end)
-            QuickSort(arr, c, end);
+
+        swap(arr, i + 1, end);
+
+        QuickSort(arr, begin, i);
+        QuickSort(arr, i + 2, end);
     }
 
 
