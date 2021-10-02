@@ -3,10 +3,11 @@ package com.ozzero;
 import java.util.Iterator;
 
 
+
 public class myList<T> implements Iterable<T> {
-    private T value = null;
     private int size = 0;
-    private myList<T> next = null;
+    private ListNode<T> first = null;
+    private ListNode<T> last = null;
 
     // Iterator
     /**
@@ -14,16 +15,16 @@ public class myList<T> implements Iterable<T> {
      * 
      * </p> 1. Ссылка на элемент списка {@link #current} 
      * </p> 2. Конструктор по умолчанию {@link #iterator()}
-     * </p> 3. Методы с итераторами на начало и конец списка
+     * </p> 3. Методы с итераторами на начало и конец списка 🚑🚑🚑
      */
     public Iterator<T> iterator() {
         return new myIterator<T>(this);
     }
     static class myIterator<T> implements Iterator<T> {
-        private myList<T> current;
+        private ListNode<T> current;
 
         public myIterator(myList<T> th) {
-            current = th;
+            current = th.first;
         }
         
         @Override
@@ -40,46 +41,79 @@ public class myList<T> implements Iterable<T> {
         }
     }
 
+    static class ListNode<T> {
+        private T value = null;
+        private ListNode<T> next = null;
+    
+        ListNode() {
+            value = null;
+            next = null;
+        }
+    
+        ListNode(T obj) {
+            value = obj;
+        }
+    
+        ListNode(ListNode<T> ln) {
+            this.value = ln.value;
+
+            ListNode<T> iter = ln.next;
+            
+            ListNode<T> temp = this;
+
+
+            while(iter != null) {
+                temp.next = new ListNode<T>(iter.value);
+                temp = temp.next;
+                iter = iter.next;
+            }
+        }
+    
+        ListNode(int n) { // Создает последовательность из n узлов
+            ListNode<T> temp = this;
+    
+            for(int i = 0; i < n - 1; i++) {
+                temp.next = new ListNode<T>();
+                temp = temp.next;
+            }
+        }
+    }
+
     // Constructors
     public myList(int n) {
         this.size = n;
-        this.next = new myList<T>(n, 1);
+        this.first = new ListNode<T>(n);
+        this.last = getNode(size - 1);
     }
 
     public myList() {
         this.size = 0;
-        this.next = null;
+        this.first = null;
+        this.last = null;
     }
 
     public myList(myList<T> other) { 
-        this.value = other.value;
         this.size = other.size;
-        this.next = (other.next == null) ? null : new myList<>(other.next);
-    }
-
-    private myList(int n, int c) {
-        this.size = -1;
-        this.next = (c == n - 1) ? null : new myList<T>(n, c + 1);
+        this.first = new ListNode<T>(other.first);
+        this.last = getNode(size - 1);
     }
 
     // Overrides
 
     // Private methods
-    private myList<T> getNode(int index) {
-        if(index < 0) {
+    private ListNode<T> getNode(int index) {
+        if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         
-        myList<T> t = this;
-        for(int i = 1; i <= index; i++) {
-            t = t.next;
-
-            if(t == null) 
-                break;
+        ListNode<T> temp = this.first;
+        for(int i = 0; i < index; i++) {
+            temp = temp.next;
         }
 
-        return t;
+        return temp;
     }
+
 
     // Public non-static methods
     public T get(int index) {
@@ -87,45 +121,38 @@ public class myList<T> implements Iterable<T> {
             throw new IndexOutOfBoundsException();
         }
         
-        myList<T> t = this;
+        ListNode<T> temp = this.first;
         for(int i = 1; i <= index; i++) {
-            t = t.next;
+            temp = temp.next;
         }
 
-        return t.value;
+        return temp.value;
     }
     
 
     public void set(int index, T obj) {
-        myList<T> t = getNode(index);
-        t.value = obj;
+        ListNode<T> temp = getNode(index);
+        temp.value = obj;
     }
 
     /**
      * Вставка в начало
      */
     public void pushFront(T obj) {
-        myList<T> node = new myList<>();
-        node.value = this.value;        // Почему именно так, я оставлю как копирайт
-        node.next = this.next;
-        node.size = this.size;
-
-        this.value = obj;
-        this.next = node;
-
-        this.size += 1;
+        ListNode<T> node = new ListNode<>(obj);
+        node.next = this.first;
+        this.first = node;
+        size++;
     }
 
     /**
      * Вставка в конец
      */
     public void pushBack(T obj) {
-        myList<T> node = new myList<>();
-        node.value = obj;
-        myList<T> t = getNode(this.size - 1); 
-
-        this.size += 1;
-        t.next = node; // Добавление в конец
+        ListNode<T> node = new ListNode<>(obj);
+        this.last.next = node;
+        this.last = node;
+        size++;
     }
 
     /**
@@ -135,18 +162,22 @@ public class myList<T> implements Iterable<T> {
     public T popBack() {
         if(this.size == 0) 
             throw new IndexOutOfBoundsException("Size of list equal 0");
-        if(this.size > 1) {
-            myList<T> t = getNode(this.size - 2);
-            T r = t.next.value;
-            t.next = null;
-            this.size -= 1;
-            return r;
+
+        if(size > 1) {
+            ListNode<T> node = this.last;
+            this.last = getNode(size - 2);
+            this.last.next = null;
+
+            size--;
+            return node.value;
         }
         else {
-            T r = this.value;
-            this.value = null;
-            this.size = 0;
-            return r;
+            ListNode<T> node = this.last;
+            this.last = null;
+            this.first = null;
+            size--;
+
+            return node.value;
         }
     }
 
@@ -157,19 +188,21 @@ public class myList<T> implements Iterable<T> {
     public T popFront() {
         if(this.size == 0) 
             throw new IndexOutOfBoundsException("Size of list equal 0");
-        if(this.size > 1) {
-            myList<T> scnd = getNode(1);
-            T r = this.value;
-            this.value = scnd.value;
-            this.next = getNode(2);
-            this.size -= 1;
-            return r;
+
+        if(size > 1) {
+            ListNode<T> node = this.first;
+            this.first = getNode(1);
+            
+            size--;
+            return node.value;
         }
         else {
-            T r = this.value;
-            this.value = null;
-            this.size = 0;
-            return r;
+            ListNode<T> node = this.first;
+            this.first = null;
+            this.last = null;
+            size--;
+
+            return node.value;
         }
     }
 
@@ -178,52 +211,38 @@ public class myList<T> implements Iterable<T> {
      * @param obj
      */
     public int erase(T obj) {
-        myList<T> t = this;
+        ListNode<T> prevNode = null;
+        ListNode<T> nowNode = this.first;
 
-        if(this.size <= 1) { // Только 1 элемент
-            if(this.value.equals(obj)) {
-                this.value = null;
-                this.size = 0;
-                return 0;
-            }
-            return -1;
-        }
-
-        for(int i = 0; i < this.size; i++) {
-            if(t.value.equals(obj)) {
-                this.size -= 1;
-                myList<T> target = getNode(i);
-                myList<T> from = getNode(Math.max(i - 1, 0));
-                myList<T> to = getNode(Math.min(i + 1, this.size - 1));
+        for(int i = 0; i < size; i++) {
+            if(nowNode.value.equals(obj)) {
+                if(prevNode != null)
+                    prevNode.next = nowNode.next;
+                size--;
 
                 if(i == 0) {
-                    this.value = to.value;
-                    target = to;
-                    to = getNode(i + 2);
+                    this.first = nowNode.next;
                 }
 
-                target.value = null; // Обнуление элемента
-                target.next = null;
-                
-                from.next = to; // Перекидка связи
+                if(i == size) {
+                    this.last = getNode(size - 1);
+                }
 
                 return i;
             }
-
-            t = t.next;
+            else {
+                prevNode = nowNode;
+                nowNode = nowNode.next;
+            }
         }
 
         return -1;
     }
 
     public void clear() {
-        myList<T> t = this;
-        for(int i = 0; i < this.size; i++) {
-            t.value = null; // Отцепляем все объекты
-            t = t.next;
-        }
-        this.next = null; // Отцепляем весь хвост
-        this.size = 0;
+        size = 0;
+        this.first = null;
+        this.last = null;
         System.gc(); // Просим систему собрать мусор (ну пожалуйста 🥺)
     }
 
