@@ -92,16 +92,17 @@ public class EffectiveSort {
 
     public static void HeapSort(int arr[], int begin, int end )
     {
-        for (int i = (begin + end) / 2 - 1; i >= begin; i--)
-            heapify(arr, end + 1, i, begin, end);
+        int n = (end - begin) + 1;
+        for (int i = n / 2 - 1; i >= begin; i--)
+            heapify(arr, end + 1, i, begin);
  
         for (int i = end; i > begin; i--) {
             swap(arr, i, begin);
-            heapify(arr, i, begin, begin, end);
+            heapify(arr, i, begin, begin);
         }
     }
  
-    public static void heapify(int arr[], int n, int i, int begin, int end)
+    public static void heapify(int arr[], int n, int i, int begin)
     {
         int largest = (i - begin) + begin; // Initialize largest as root
         int l = 2 * (i - begin) + 1 + begin; // left = 2*i + 1
@@ -118,7 +119,7 @@ public class EffectiveSort {
             arr[i] = arr[largest];
             arr[largest] = swap;
 
-            heapify(arr, n, largest, begin, end);
+            heapify(arr, n, largest, begin);
         }
     }
 
