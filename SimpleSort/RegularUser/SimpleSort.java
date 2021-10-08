@@ -83,7 +83,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<? super T>> void BubbleSort(List<T> list) {
+    public static <T extends Comparable<? super T>> void BubbleSort(List<T> extends Comparable<T>> list) {
         for(int i = 0; i < list.size(); i++) {
             for(int j = 0; j < list.size() - 1; j++) {
                 if(list.get(j).compareTo(list.get(j + 1))  > 0) {
