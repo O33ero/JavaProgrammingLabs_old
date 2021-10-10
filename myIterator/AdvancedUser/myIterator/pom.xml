@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.ozzero</groupId>
-  <artifactId>LinSort</artifactId>
+  <artifactId>myIterator</artifactId>
   <version>1.0</version>
 
-  <name>LinSort</name>
+  <name>myIterator</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
