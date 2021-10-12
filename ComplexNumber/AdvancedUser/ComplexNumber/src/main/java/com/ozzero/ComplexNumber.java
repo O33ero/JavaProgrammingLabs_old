@@ -1,4 +1,3 @@
-package com.ozzero;
 
 /**
  * {@code ComplexNumber} - класс для описания поля комплексных чисел.
@@ -53,12 +52,14 @@ public class ComplexNumber {
     }
 
     private double caclArg(double real, double image) {
-        if (real == 0 && image == 0) return Double.NaN;
 
-        if(real == 0)
-            return image > 0 ? Math.PI / 2 : 3 * Math.PI / 2;
-        else 
-            return Math.atan(image/real);
+        if (real > 0)                   return Math.atan(image / real);
+        if (real < 0 && image >= 0)     return Math.atan(image / real) + Math.PI;
+        if (real < 0 && image < 0)      return Math.atan(image / real) - Math.PI;
+        if (real == 0 && image > 0)     return Math.PI / 2;
+        if (real == 0 && image < 0)     return Math.PI / 2;
+
+        return Double.NaN;
     }
 
     // Public non-methods
@@ -69,7 +70,7 @@ public class ComplexNumber {
         return this;
     }
 
-    public ComplexNumber minus(ComplexNumber other) {
+    public ComplexNumber sub(ComplexNumber other) {
         this.real -= other.real;
         this.image -= other.image;
 
