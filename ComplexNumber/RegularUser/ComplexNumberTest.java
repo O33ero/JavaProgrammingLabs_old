@@ -16,8 +16,8 @@ public class ComplexNumberTest {
             
             a = new ComplexNumber(1, 1);
             b = new ComplexNumber(2, 2);
-            assert new ComplexNumber(-1, -1).equals(a.minus(b)) : "Failed test #3";
-            assert new ComplexNumber(0, 0).equals(b.minus(b)) : "Failed test #4";
+            assert new ComplexNumber(-1, -1).equals(a.sub(b)) : "Failed test #3";
+            assert new ComplexNumber(0, 0).equals(b.sub(b)) : "Failed test #4";
 
             a = new ComplexNumber(1, 1);
             b = new ComplexNumber(2, 2);
