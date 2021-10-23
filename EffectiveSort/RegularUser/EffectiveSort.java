@@ -41,22 +41,22 @@ public class EffectiveSort {
 
     public static void QuickSort(int[] arr, int begin, int end) {
 
-        if (array.length == 0)
+        if (arr.length == 0)
             return;
  
-        if (low >= high)
+        if (begin >= end)
             return;
  
-        int middle = low + (high - low) / 2;
-        long opora = array[middle];
+        int middle = begin + (end - begin) / 2;
+        long opora = arr[middle];
  
-        int i = low, j = high;
+        int i = begin, j = end;
         while (i <= j) {
-            while (array[i] < opora) {
+            while (arr[i] < opora) {
                 i++;
             }
  
-            while (array[j] > opora) {
+            while (arr[j] > opora) {
                 j--;
             }
  
@@ -67,11 +67,11 @@ public class EffectiveSort {
             }
         }
  
-        if (low < j)
-            QuickSort(array, low, j);
+        if (begin < j)
+            QuickSort(arr, begin, j);
  
-        if (high > i)
-            QuickSort(array, i, high);
+        if (end > i)
+            QuickSort(arr, i, end);
     }
 
 
@@ -81,22 +81,22 @@ public class EffectiveSort {
 
     public static <T extends Comparable<T>> void QuickSort(T[] arr, int begin, int end) {
 
-        if (array.length == 0)
+        if (arr.length == 0)
             return;
  
-        if (low >= high)
+        if (begin >= end)
             return;
  
-        int middle = low + (high - low) / 2;
-        T opora = array[middle];
+        int middle = begin + (end - begin) / 2;
+        T opora = arr[middle];
  
-        int i = low, j = high;
+        int i = begin, j = end;
         while (i <= j) {
-            while (array[i].compareTo(opora) < 0) {
+            while (arr[i].compareTo(opora) < 0) {
                 i++;
             }
  
-            while (array[j].compareTo(opora) > 0) {
+            while (arr[j].compareTo(opora) > 0) {
                 j--;
             }
  
@@ -107,11 +107,11 @@ public class EffectiveSort {
             }
         }
  
-        if (low < j)
-            QuickSort(array, low, j);
+        if (begin < j)
+            QuickSort(arr, begin, j);
  
-        if (high > i)
-            QuickSort(array, i, high);
+        if (end > i)
+            QuickSort(arr, i, end);
     }
 
 
