@@ -41,22 +41,37 @@ public class EffectiveSort {
 
     public static void QuickSort(int[] arr, int begin, int end) {
 
-        if(begin >= end) return;
-
-        int p = arr[end]; // Опорный элемент
-        int i = begin - 1; // Левая граница (отвечает за меньшее)
-        
-        for(int j = begin; j < end; j++) {
-            if(arr[j] <= p) {
+        if (array.length == 0)
+            return;
+ 
+        if (low >= high)
+            return;
+ 
+        int middle = low + (high - low) / 2;
+        long opora = array[middle];
+ 
+        int i = low, j = high;
+        while (i <= j) {
+            while (array[i] < opora) {
                 i++;
+            }
+ 
+            while (array[j] > opora) {
+                j--;
+            }
+ 
+            if (i <= j) {
                 swap(arr, i, j);
+                i++;
+                j--;
             }
         }
-
-        swap(arr, i + 1, end);
-
-        QuickSort(arr, begin, i);
-        QuickSort(arr, i + 2, end);
+ 
+        if (low < j)
+            QuickSort(array, low, j);
+ 
+        if (high > i)
+            QuickSort(array, i, high);
     }
 
 
@@ -66,22 +81,37 @@ public class EffectiveSort {
 
     public static <T extends Comparable<T>> void QuickSort(T[] arr, int begin, int end) {
 
-        if(begin >= end) return;
-
-        T p = arr[end]; // Опорный элемент
-        int i = begin - 1; // Левая граница (отвечает за меньшее)
-        
-        for(int j = begin; j < end; j++) {
-            if(arr[j].compareTo(p) <= 0) {
+        if (array.length == 0)
+            return;
+ 
+        if (low >= high)
+            return;
+ 
+        int middle = low + (high - low) / 2;
+        T opora = array[middle];
+ 
+        int i = low, j = high;
+        while (i <= j) {
+            while (array[i].compareTo(opora) < 0) {
                 i++;
+            }
+ 
+            while (array[j].compareTo(opora) > 0) {
+                j--;
+            }
+ 
+            if (i <= j) {
                 swap(arr, i, j);
+                i++;
+                j--;
             }
         }
-
-        swap(arr, i + 1, end);
-
-        QuickSort(arr, begin, i);
-        QuickSort(arr, i + 2, end);
+ 
+        if (low < j)
+            QuickSort(array, low, j);
+ 
+        if (high > i)
+            QuickSort(array, i, high);
     }
 
 
