@@ -41,37 +41,26 @@ public class EffectiveSort {
 
     public static void QuickSort(int[] arr, int begin, int end) {
 
-        if (arr.length == 0)
-            return;
- 
-        if (begin >= end)
-            return;
- 
-        int middle = begin + (end - begin) / 2;
-        long opora = arr[middle];
- 
-        int i = begin, j = end;
-        while (i <= j) {
-            while (arr[i] < opora) {
-                i++;
-            }
- 
-            while (arr[j] > opora) {
-                j--;
-            }
- 
-            if (i <= j) {
+        int c = (end + begin) / 2; // Индекс опорного элемента
+        int p = arr[c]; // Опорный элемент
+        int i = begin; // Левая граница (отвечает за меньшее)
+        int j = end; // Правая граница (отвечает за большее)
+        
+
+        while(i <= j) {
+            while(arr[i] < p) i++;
+            while(arr[j] > p) j--;
+
+            if(i <= j) {
                 swap(arr, i, j);
                 i++;
                 j--;
             }
         }
- 
-        if (begin < j)
-            QuickSort(arr, begin, j);
- 
-        if (end > i)
-            QuickSort(arr, i, end);
+        if(j > begin) 
+            QuickSort(arr, begin, c);
+        if(i < end)
+            QuickSort(arr, c, end);
     }
 
 
@@ -81,37 +70,26 @@ public class EffectiveSort {
 
     public static <T extends Comparable<T>> void QuickSort(T[] arr, int begin, int end) {
 
-        if (arr.length == 0)
-            return;
- 
-        if (begin >= end)
-            return;
- 
-        int middle = begin + (end - begin) / 2;
-        T opora = arr[middle];
- 
-        int i = begin, j = end;
-        while (i <= j) {
-            while (arr[i].compareTo(opora) < 0) {
-                i++;
-            }
- 
-            while (arr[j].compareTo(opora) > 0) {
-                j--;
-            }
- 
-            if (i <= j) {
+        int c = (end + begin) / 2; // Индекс опорного элемента
+        int p = arr[c]; // Опорный элемент
+        int i = begin; // Левая граница (отвечает за меньшее)
+        int j = end; // Правая граница (отвечает за большее)
+        
+
+        while(i <= j) {
+            while(arr[i].compareTo(p) < 0) i++;
+            while(arr[j].compareTo(p) > 0) j--;
+
+            if(i <= j) {
                 swap(arr, i, j);
                 i++;
                 j--;
             }
         }
- 
-        if (begin < j)
-            QuickSort(arr, begin, j);
- 
-        if (end > i)
-            QuickSort(arr, i, end);
+        if(j > begin) 
+            QuickSort(arr, begin, c);
+        if(i < end)
+            QuickSort(arr, c, end);
     }
 
 
