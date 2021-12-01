@@ -36,8 +36,9 @@ public class binaryTree<T extends Comparable<T>> {
         }
     }
 
-    treeNode<T> root;
-    int size;
+    private treeNode<T> root;
+    private int size;
+    private int maxLevel = 0;
     
     // Constructors
     binaryTree() {
@@ -46,7 +47,7 @@ public class binaryTree<T extends Comparable<T>> {
     }
 
     binaryTree(binaryTree<T> other) { // https://coderoad.ru/1753486/Конструктор-копирования-для-двоичного-дерева-C
-        root = new treeNode<>();
+        root = new treeNode<T>();
         size = 0;
         Stack<treeNode<T>> stack = new Stack<>();
         treeNode<T> cur = other.root;
@@ -84,53 +85,53 @@ public class binaryTree<T extends Comparable<T>> {
             if(cur.value.compareTo(value) == 0) // Такой уже есть
                 break;
             
-            if(cur.left == null) { // Если слева свободно, то занимаем
-                cur.left = new treeNode<T>(value);
-                this.size++;
-                break;
-            }
-            if(cur.value.compareTo(value) > 0) {
-                if(cur.value.compareTo(cur.left.value) < 0) { // Если слева стоит число большее чем корень, то отправлем его направо и становимся на его место
-                    cur.rigth = cur.left;
-                    cur.left = new treeNode<T>(value);
-                    this.size++;
-                    break;
+            if(cur.value.compareTo(value) < 0) {
+                if(cur.rigth != null) {
+                    cur = cur.rigth;
+                    continue;
                 }
                 else {
-                    cur = cur.left;
-                    continue;
+                    this.size++;
+                    cur.rigth = new treeNode<>(value);
+                    break;
                 }
             }
 
-            if(cur.value.compareTo(value) < 0) {
-                if(cur.rigth == null) {
-                    cur.rigth = new treeNode<T>(value);
-                    this.size++;
-                    break;
+            if(cur.value.compareTo(value) > 0) {
+                if(cur.left != null) {
+                    cur = cur.left;
+                    continue;
                 }
                 else {
-                    cur = cur.rigth;
+                    this.size++;
+                    cur.left = new treeNode<>(value);
+                    break;
                 }
             }
         }
     }
 
     public boolean contain(T value) {
-        
+        Stack<treeNode<T>> stack = new Stack<>();
         treeNode<T> cur = this.root;
         while(cur != null) {
-            if(cur.value.equals(value))
-                return true;
             
-            if(value.compareTo(cur.value) > 0) {
-                if(cur.left.value.equals(value)) // Случай, если значение оказалось на левой ветке
-                    return true;
-                cur = cur.rigth;
+            if(cur.value.equals(value)) 
+                return true;
+
+            if(cur.rigth != null) {
+                stack.add(cur.rigth);
             }
-            else {
+            if(cur.left != null) {
                 cur = cur.left;
             }
-        }
+            else if (stack.isEmpty()) {
+                break;
+            }
+            else {
+                cur = stack.pop();
+            }
+        }   
 
         return false;
     }
@@ -164,6 +165,21 @@ public class binaryTree<T extends Comparable<T>> {
     // Getters and Setters
     public int size() {
         return size;
+    }
+
+    public int getMaxLevel() {
+        treeNode<T> cur = this.root;
+
+        if(cur.left != null) level(cur.left, 1);
+        if(cur.rigth != null) level(cur.rigth, 1);
+
+        return maxLevel;
+    }
+
+    private void level(treeNode<T> node, int lvl) {
+        if(lvl > maxLevel) maxLevel = lvl;
+        if(node.left != null) level(node.left, lvl + 1);
+        if(node.rigth != null) level(node.rigth, lvl + 1);
     }
 
 }

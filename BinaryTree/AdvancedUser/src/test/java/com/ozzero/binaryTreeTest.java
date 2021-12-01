@@ -6,6 +6,22 @@ import org.junit.Test;
 
 public class binaryTreeTest {
 
+    @Test 
+    public void testGetLevel_1() {
+        binaryTree<Integer> b = new binaryTree<>();
+
+        b.insert(15);
+        b.insert(7);
+        b.insert(3);
+        b.insert(14);
+        b.insert(8);
+        b.insert(4);
+        b.insert(9);
+        b.insert(11);
+
+        assertEquals(5, b.getMaxLevel());
+    }
+
     @Test
     public void testInsert_1() {
         binaryTree<Integer> b = new binaryTree<>();
@@ -17,7 +33,7 @@ public class binaryTreeTest {
         b.insert(4);
         b.insert(8);
 
-        assertEquals(7, b.size);
+        assertEquals(7, b.size());
     }
 
     @Test
