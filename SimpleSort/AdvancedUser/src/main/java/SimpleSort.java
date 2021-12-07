@@ -1,22 +1,22 @@
-package com.ozzero;
+
 
 import java.security.InvalidAlgorithmParameterException;
 import java.util.List;
 
 /**
  * {@link #SimpleSort} - реализация сортировок пузырек, вставкой и выбором 
- * I.   BubbleSort
+ * I.   bubbleSort
  * II.  InsertionSort
  * III. SelectionSort
  * 
- * </p> 1. Сортировка для целых чисел {@link #BubbleSort(int[])} {@link #SelectionSort(int[])} {@link #InsertionSort(int[])}  
- * </p> 2. Сортировка подпоследовательности {@link #BubbleSort(int[], int, int)} {@link #SelectionSort(int[], int, int)} {@link #InsertionSort(int[])}  
- * </p> 3. Сортировка с любыми типами данных {@link #BubbleSort(Comparable[])} {@link #SelectionSort(Comparable[])} {@link #InsertionSort(Comparable[])}  
- * </p> 4. Сортировка контейнера  {@link #BubbleSort(List)} {@link #SelectionSort(List)} {@link #InsertionSort(List)}  
+ * </p> 1. Сортировка для целых чисел {@link #bubbleSort(int[])} {@link #selectionSort(int[])} {@link #InsertionSort(int[])}  
+ * </p> 2. Сортировка подпоследовательности {@link #bubbleSort(int[], int, int)} {@link #SelectionSort(int[], int, int)} {@link #InsertionSort(int[])}  
+ * </p> 3. Сортировка с любыми типами данных {@link #bubbleSort(Comparable[])} {@link #SelectionSort(Comparable[])} {@link #InsertionSort(Comparable[])}  
+ * </p> 4. Сортировка контейнера  {@link #bubbleSort(List)} {@link #SelectionSort(List)} {@link #InsertionSort(List)}  
  */
 public class SimpleSort {
 
-    public static void BubbleSort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         for(int i = 0; i < arr.length; i++) {
             for(int j = 0; j < arr.length - 1; j++) {
                 if(arr[j] > arr[j + 1]) {
@@ -28,7 +28,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>> void BubbleSort(T[] arr) {
+    public static <T extends Comparable<T>> void bubbleSort(T[] arr) {
         for(int i = 0; i < arr.length; i++) {
             for(int j = 0; j < arr.length - 1; j++) {
                 if(arr[j].compareTo(arr[j + 1])  > 0) {
@@ -40,7 +40,7 @@ public class SimpleSort {
         }
     }
 
-    public static void BubbleSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static void bubbleSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -61,7 +61,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>> void BubbleSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static <T extends Comparable<T>> void bubbleSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -83,7 +83,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<? super T>> void BubbleSort(List<T> list) {
+    public static <T extends Comparable<? super T>> void bubbleSort(List<T> list) {
         for(int i = 0; i < list.size(); i++) {
             for(int j = 0; j < list.size() - 1; j++) {
                 if(list.get(j).compareTo(list.get(j + 1))  > 0) {
@@ -95,7 +95,7 @@ public class SimpleSort {
         }
     }
 
-    public static void InsertionSort(int[] arr) {
+    public static void insertionSort(int[] arr) {
         for(int i = 1; i < arr.length; i++) {
             int j = i;
             while(arr[j] < arr[Math.max(0, j - 1)] && j > 0) {
@@ -107,7 +107,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>>void InsertionSort(T[] arr) {
+    public static <T extends Comparable<T>>void insertionSort(T[] arr) {
         for(int i = 1; i < arr.length; i++) {
             int j = i;
             while(arr[j].compareTo(arr[Math.max(0, j - 1)]) < 0 && j > 0) {
@@ -120,7 +120,7 @@ public class SimpleSort {
     }
 
 
-    public static void InsertionSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static void insertionSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -142,7 +142,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>> void InsertionSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static <T extends Comparable<T>> void insertionSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -164,7 +164,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<? super T>> void InsertionSort(List<T> list) {
+    public static <T extends Comparable<? super T>> void insertionSort(List<T> list) {
         for(int i = 1; i < list.size(); i++) {
             int j = i;
             while(list.get(j).compareTo(list.get(Math.max(0, j - 1))) < 0 && j > 0) {
@@ -179,7 +179,7 @@ public class SimpleSort {
 
 
 
-    public static void SelectionSort(int[] arr) {
+    public static void selectionSort(int[] arr) {
         for(int i = 0; i < arr.length; i++) {
             int min_index = i;
             int min_value = arr[i];
@@ -195,7 +195,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>> void SelectionSort(T[] arr) {
+    public static <T extends Comparable<T>> void selectionSort(T[] arr) {
         for(int i = 0; i < arr.length; i++) {
             int min_index = i;
             T min_value = arr[i];
@@ -211,7 +211,7 @@ public class SimpleSort {
         }
     }
 
-    public static void SelectionSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static void selectionSort(int[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -237,7 +237,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<T>> void SelectionSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
+    public static <T extends Comparable<T>> void selectionSort(T[] arr, int begin, int end) throws InvalidAlgorithmParameterException {
         if(begin < 0 || begin > arr.length) {
             throw new IndexOutOfBoundsException();
         }
@@ -263,7 +263,7 @@ public class SimpleSort {
         }
     }
 
-    public static <T extends Comparable<? super T>> void SelectionSort(List<T> list) {
+    public static <T extends Comparable<? super T>> void selectionSort(List<T> list) {
         for(int i = 0; i < list.size(); i++) {
             int min_index = i;
             T min_value = list.get(i);

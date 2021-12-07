@@ -1,5 +1,3 @@
-package com.ozzero;
-
 import static org.junit.Assert.assertArrayEquals;
 
 import java.util.LinkedList;
@@ -12,7 +10,7 @@ public class SimpleSortTest {
     @Test
     public void testBubbleSort_1() {
         int[] arr = {1, 5, 3, 2, 4};
-        SimpleSort.BubbleSort(arr);   
+        SimpleSort.bubbleSort(arr);   
 
         assertArrayEquals(new int[] {1, 2, 3, 4, 5}, arr);
     }
@@ -20,7 +18,7 @@ public class SimpleSortTest {
     @Test
     public void testBubbleSort_2() {
         Integer[] arr = {1, 5, 3, 2, 4};
-        SimpleSort.BubbleSort(arr);   
+        SimpleSort.bubbleSort(arr);   
 
         assertArrayEquals(new Integer[] {1, 2, 3, 4, 5}, arr);
     }
@@ -28,7 +26,7 @@ public class SimpleSortTest {
     @Test
     public void testBubbleSort_3() {
         Character[] arr = {'a', 'c', 'b', 'f', 'e'};
-        SimpleSort.BubbleSort(arr);   
+        SimpleSort.bubbleSort(arr);   
 
         assertArrayEquals(new Character[] {'a', 'b', 'c', 'e', 'f'}, arr);
     }
@@ -36,7 +34,7 @@ public class SimpleSortTest {
     @Test
     public void testBubbleSort_4() {
         String[] arr = {"abb", "aba", "abc", "baa", "acc"};
-        SimpleSort.BubbleSort(arr);   
+        SimpleSort.bubbleSort(arr);   
 
         assertArrayEquals(new String[] {"aba", "abb", "abc", "acc", "baa"}, arr);
     }
@@ -50,7 +48,7 @@ public class SimpleSortTest {
         lst.add("abc");
         lst.add("baa");
         lst.add("acc");
-        SimpleSort.BubbleSort(lst);
+        SimpleSort.bubbleSort(lst);
         assertArrayEquals(new Object[] {"aba", "abb", "abc", "acc", "baa"}, lst.toArray());
     }
 
@@ -58,7 +56,7 @@ public class SimpleSortTest {
     @Test
     public void testSelectionSort_1() {
         int[] arr = {1, 5, 3, 2, 4};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.selectionSort(arr);   
 
         assertArrayEquals(new int[] {1, 2, 3, 4, 5}, arr);
     }
@@ -66,7 +64,7 @@ public class SimpleSortTest {
     @Test
     public void testSelectionSort_2() {
         Integer[] arr = {1, 5, 3, 2, 4};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.selectionSort(arr);   
 
         assertArrayEquals(new Integer[] {1, 2, 3, 4, 5}, arr);
     }
@@ -74,7 +72,7 @@ public class SimpleSortTest {
     @Test
     public void testSelectionSort_3() {
         Character[] arr = {'a', 'c', 'b', 'f', 'e'};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.selectionSort(arr);   
 
         assertArrayEquals(new Character[] {'a', 'b', 'c', 'e', 'f'}, arr);
     }
@@ -82,7 +80,7 @@ public class SimpleSortTest {
     @Test
     public void tesSelectionSort_4() {
         String[] arr = {"abb", "aba", "abc", "baa", "acc"};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.selectionSort(arr);   
 
         assertArrayEquals(new String[] {"aba", "abb", "abc", "acc", "baa"}, arr);
     }
@@ -96,14 +94,14 @@ public class SimpleSortTest {
         lst.add("abc");
         lst.add("baa");
         lst.add("acc");
-        SimpleSort.SelectionSort(lst);
+        SimpleSort.selectionSort(lst);
         assertArrayEquals(new Object[] {"aba", "abb", "abc", "acc", "baa"}, lst.toArray());
     }
 
     @Test
     public void testInsertionSort_1() {
         int[] arr = {6, 5, 3, 1, 8, 7, 2, 4};
-        SimpleSort.InsertionSort(arr);   
+        SimpleSort.insertionSort(arr);   
 
         assertArrayEquals(new int[] {1, 2, 3, 4, 5, 6, 7, 8}, arr);
     }
@@ -111,7 +109,7 @@ public class SimpleSortTest {
     @Test
     public void testInsertionSort_2() {
         Integer[] arr = {1, 5, 3, 2, 4};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.insertionSort(arr);   
 
         assertArrayEquals(new Integer[] {1, 2, 3, 4, 5}, arr);
     }
@@ -119,7 +117,7 @@ public class SimpleSortTest {
     @Test
     public void testInsertionSort_3() {
         Character[] arr = {'a', 'c', 'b', 'f', 'e'};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.insertionSort(arr);   
 
         assertArrayEquals(new Character[] {'a', 'b', 'c', 'e', 'f'}, arr);
     }
@@ -127,7 +125,7 @@ public class SimpleSortTest {
     @Test
     public void testInsertionSort_4() {
         String[] arr = {"abb", "aba", "abc", "baa", "acc"};
-        SimpleSort.SelectionSort(arr);   
+        SimpleSort.insertionSort(arr);   
 
         assertArrayEquals(new String[] {"aba", "abb", "abc", "acc", "baa"}, arr);
     }
@@ -141,7 +139,7 @@ public class SimpleSortTest {
         lst.add("abc");
         lst.add("baa");
         lst.add("acc");
-        SimpleSort.SelectionSort(lst);
+        SimpleSort.insertionSort(lst);
         assertArrayEquals(new Object[] {"aba", "abb", "abc", "acc", "baa"}, lst.toArray());
     }
 
